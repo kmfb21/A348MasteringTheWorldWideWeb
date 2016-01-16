@@ -1,0 +1,51 @@
+#!/usr/bin/python
+import cgi, cgitb, random
+cgitb.enable()
+print "Content-type: text/html\n\n",
+data = cgi.FieldStorage()
+
+ans = data.getvalue("ans");
+if ans:
+  high = data.getvalue("high");
+  low = data.getvalue("low");
+  guess = data.getvalue("guess");
+  bal = data.getvalue("bal");
+  if int(ans) == int(guess):
+    message = "You win!";
+  elif int(ans) < int(guess):
+    high = guess;
+    bal = str(int(bal) - 1);
+    if int(bal) <= 0:
+      message = "You lose, press reset!";
+    else:
+      message = "The number is between " + low + " and " + high + " You still have " + bal + " times!";
+  else:
+    low = guess;
+    bal = str(int(bal) - 1);
+    if int(bal) <= 0:
+      message = "You lose, press reset!";
+    else:
+      message = "The number is between " + low + " and " + high + " You still have " + bal + " times!";
+else:
+  message = "Lets begin, guess a number between 0 and 100: (You have 6 times)";
+  ans = random.randint(0,100);
+  low = 0;
+  high = 100;
+  bal = 6;
+
+print """
+<body>
+  <form>
+    <center><h1> %s </h1></center>
+    <p><center>
+    <input type=submit name=action value=Guess>
+    <input type=text name=guess></center>
+    <hr>
+    <center><h2> <a href="http://silo.cs.indiana.edu:51516/cgi-bin/hw2">Reset!</a> </h2> </center>
+	<input type=hidden name=ans value=%s>
+	<input type=hidden name=high value=%s>
+	<input type=hidden name=low value=%s>
+	<input type=hidden name=bal value=%s>
+  </form>
+</body>
+""" % (message, ans, high, low, bal)
