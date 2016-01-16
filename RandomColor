@@ -1,0 +1,29 @@
+#!/usr/bin/python
+
+import cgi, cgitb
+cgitb.enable() # not essential but good practice from now on
+
+print "Content-type: text/html\n\n",
+
+colors = ["beige", "red", "black", "yellow", "pink", "#0066cc"]
+
+data = cgi.FieldStorage()
+
+if data.keys():
+  message = "What!? You again?"
+  count = (1 + int(data.getvalue("count"))) % len(colors)
+else:
+  message = "Welcome, buddy!"
+  count = 0
+
+print """
+<body bgcolor="%s">
+  <form method=post>
+    %s <p>
+    You have clicked the button %s times. <p>
+    <input type=submit name=action value=Proceed>
+    <hr>
+    <input type=hidden name=count value=%s>
+  </form>
+</body>
+""" % (colors[count], message, count, count)
