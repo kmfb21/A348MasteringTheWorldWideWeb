@@ -51,9 +51,4 @@
   What is <?=$n1?> + <?=$n2?> ? Answer: <input type=text name=answer size=4> <p> 
   Press <input type=submit name=action value=Proceed> to send your answer or <input type=submit name=action value=Reset> to restart.  
   <input type=hidden name=ageCopy value="<?=$age?>">
-
-
-
-
-
 </form>
