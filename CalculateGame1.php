@@ -1,6 +1,5 @@
 <?
 
-
   $message = $_REQUEST["message"]; 
   $n1      = $_REQUEST["n1"]; 
   $n2      = $_REQUEST["n2"]; 
@@ -9,9 +8,6 @@
 
   $answer  = $_REQUEST["answer"];  
   $action  = $_REQUEST["action"];  
-
-
-
 
 
     if ($message && $action != "Reset") {
@@ -34,16 +30,6 @@
       $n2 = rand(-50, 50); 
 
     } 
-
-
-
-
-
-
-
-
-
-
 
  ?>
 <form>
